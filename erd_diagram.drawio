@@ -1,0 +1,155 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ERD - Farmers Marketplace" id="erdDiagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- USERS TABLE -->
+        <mxCell id="tbl_users" value="users" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="240" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="u1" value="PK  user_id  INT" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;fontStyle=4;" vertex="1" parent="tbl_users">
+          <mxGeometry y="30" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u2" value="username  VARCHAR(50)  UNIQUE" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_users">
+          <mxGeometry y="56" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u3" value="password  VARCHAR(255)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_users">
+          <mxGeometry y="82" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u4" value="email  VARCHAR(100)  UNIQUE" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_users">
+          <mxGeometry y="108" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u5" value="full_name  VARCHAR(100)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_users">
+          <mxGeometry y="134" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u6" value="phone  VARCHAR(20)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_users">
+          <mxGeometry y="160" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u7" value="location  VARCHAR(150)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_users">
+          <mxGeometry y="186" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u8" value="created_at  TIMESTAMP" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_users">
+          <mxGeometry y="212" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- PRODUCE TABLE -->
+        <mxCell id="tbl_produce" value="produce" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="620" y="40" width="240" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="PK  produce_id  INT" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;fontStyle=4;" vertex="1" parent="tbl_produce">
+          <mxGeometry y="30" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="produce_name  VARCHAR(100)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_produce">
+          <mxGeometry y="56" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="category  ENUM(Veg,Legume,Cereal)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_produce">
+          <mxGeometry y="82" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="description  VARCHAR(255)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_produce">
+          <mxGeometry y="108" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- LISTINGS TABLE -->
+        <mxCell id="tbl_listings" value="listings" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="330" y="320" width="260" height="238" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" value="PK  listing_id  INT" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;fontStyle=4;" vertex="1" parent="tbl_listings">
+          <mxGeometry y="30" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="FK  produce_id  INT" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_listings">
+          <mxGeometry y="56" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" value="FK  farmer_id  INT (-&gt; users)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_listings">
+          <mxGeometry y="82" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" value="price  DECIMAL(10,2)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_listings">
+          <mxGeometry y="108" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="l5" value="unit  VARCHAR(20)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_listings">
+          <mxGeometry y="134" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="l6" value="quantity_available  DECIMAL(10,2)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_listings">
+          <mxGeometry y="160" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="l7" value="status  ENUM(available,sold_out)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_listings">
+          <mxGeometry y="186" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="l8" value="date_listed  TIMESTAMP" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_listings">
+          <mxGeometry y="212" width="260" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ORDERS TABLE -->
+        <mxCell id="tbl_orders" value="orders" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="640" width="240" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="o1" value="PK  order_id  INT" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;fontStyle=4;" vertex="1" parent="tbl_orders">
+          <mxGeometry y="30" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o2" value="FK  buyer_id  INT (-&gt; users)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_orders">
+          <mxGeometry y="56" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o3" value="order_date  TIMESTAMP" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_orders">
+          <mxGeometry y="82" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o4" value="total_amount  DECIMAL(10,2)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_orders">
+          <mxGeometry y="108" width="240" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5" value="status  ENUM(pending,completed,cancelled)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_orders">
+          <mxGeometry y="134" width="240" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ORDER_ITEMS TABLE -->
+        <mxCell id="tbl_order_items" value="order_items" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="620" y="640" width="260" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="oi1" value="PK  order_item_id  INT" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;fontStyle=4;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="30" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oi2" value="FK  order_id  INT (-&gt; orders)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="56" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oi3" value="FK  listing_id  INT (-&gt; listings)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="82" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oi4" value="quantity  DECIMAL(10,2)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="108" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oi5" value="price_at_purchase  DECIMAL(10,2)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="134" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oi6" value="subtotal  DECIMAL(10,2)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="160" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oi7" value="status  ENUM(pending,out_for_delivery,delivered)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="186" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oi8" value="dispatched_at  TIMESTAMP (nullable)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="212" width="260" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="oi9" value="received_at  TIMESTAMP (nullable)" style="text;align=left;verticalAlign=middle;spacingLeft=6;spacingRight=4;overflow=hidden;whiteSpace=nowrap;html=1;" vertex="1" parent="tbl_order_items">
+          <mxGeometry y="238" width="260" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- RELATIONSHIPS -->
+        <mxCell id="edge1" value="1..*" style="edgeStyle=entityRelationEdgeStyle;fontSize=11;html=1;endArrow=ERmany;startArrow=ERone;rounded=0;" edge="1" parent="1" source="tbl_users" target="tbl_listings">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" value="1..*" style="edgeStyle=entityRelationEdgeStyle;fontSize=11;html=1;endArrow=ERmany;startArrow=ERone;rounded=0;" edge="1" parent="1" source="tbl_produce" target="tbl_listings">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" value="1..*" style="edgeStyle=entityRelationEdgeStyle;fontSize=11;html=1;endArrow=ERmany;startArrow=ERone;rounded=0;" edge="1" parent="1" source="tbl_users" target="tbl_orders">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" value="1..*" style="edgeStyle=entityRelationEdgeStyle;fontSize=11;html=1;endArrow=ERmany;startArrow=ERone;rounded=0;" edge="1" parent="1" source="tbl_orders" target="tbl_order_items">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" value="1..*" style="edgeStyle=entityRelationEdgeStyle;fontSize=11;html=1;endArrow=ERmany;startArrow=ERone;rounded=0;" edge="1" parent="1" source="tbl_listings" target="tbl_order_items">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

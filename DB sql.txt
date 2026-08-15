@@ -1,0 +1,154 @@
+
+-- FARMERS MARKETPLACE - DATABASE SETUP
+
+CREATE DATABASE IF NOT EXISTS farmers_marketplace
+  CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE farmers_marketplace;
+
+-- 1. USERS
+-- One login per person. A user can act as farmer AND customer,
+-- so there is no rigid "role" column restricting them.
+
+CREATE TABLE users (
+  user_id     INT AUTO_INCREMENT PRIMARY KEY,
+  username    VARCHAR(50)  NOT NULL UNIQUE,
+  password    VARCHAR(255) NOT NULL,          -- store password_hash(), never plain text
+  email       VARCHAR(100) NOT NULL UNIQUE,
+  full_name   VARCHAR(100) NOT NULL,
+  phone       VARCHAR(20),
+  location    VARCHAR(150),
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- 2. PRODUCE (master catalog)
+
+CREATE TABLE produce (
+  produce_id    INT AUTO_INCREMENT PRIMARY KEY,
+  produce_name  VARCHAR(100) NOT NULL,
+  category      ENUM('Vegetable','Animal Product','Cereal') NOT NULL,
+  description   VARCHAR(255)
+) ENGINE=InnoDB;
+
+-- 3. LISTINGS
+-- A farmer (user) offers a produce item at THEIR chosen price.
+-- Same produce can appear in many listings from different farmers.
+
+CREATE TABLE listings (
+  listing_id          INT AUTO_INCREMENT PRIMARY KEY,
+  produce_id          INT NOT NULL,
+  farmer_id           INT NOT NULL,
+  price               DECIMAL(10,2) NOT NULL,
+  unit                VARCHAR(20) NOT NULL DEFAULT 'kg',
+  quantity_available  DECIMAL(10,2) NOT NULL,
+  status              ENUM('available','sold_out') DEFAULT 'available',
+  date_listed         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (produce_id) REFERENCES produce(produce_id) ON DELETE CASCADE,
+  FOREIGN KEY (farmer_id)  REFERENCES users(user_id)     ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+
+-- 4. ORDERS
+-- A purchase transaction made by a buyer (user).
+
+CREATE TABLE orders (
+  order_id      INT AUTO_INCREMENT PRIMARY KEY,
+  buyer_id      INT NOT NULL,
+  order_date    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  total_amount  DECIMAL(10,2) NOT NULL DEFAULT 0,
+  status        ENUM('pending','completed','cancelled') DEFAULT 'pending',
+  FOREIGN KEY (buyer_id) REFERENCES users(user_id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- 5. ORDER_ITEMS
+-- Line items linking an order to specific listings (price locked
+-- in at time of purchase, since farmer prices can change later).
+
+CREATE TABLE order_items (
+  order_item_id      INT AUTO_INCREMENT PRIMARY KEY,
+  order_id            INT NOT NULL,
+  listing_id          INT NOT NULL,
+  quantity            DECIMAL(10,2) NOT NULL,
+  price_at_purchase   DECIMAL(10,2) NOT NULL,
+  subtotal            DECIMAL(10,2) NOT NULL,
+  status              ENUM('pending','out_for_delivery','delivered') NOT NULL DEFAULT 'pending',
+  dispatched_at       TIMESTAMP NULL DEFAULT NULL,   -- set when farmer marks it out for delivery
+  received_at         TIMESTAMP NULL DEFAULT NULL,   -- set when customer acknowledges receipt
+  FOREIGN KEY (order_id)   REFERENCES orders(order_id)     ON DELETE CASCADE,
+  FOREIGN KEY (listing_id) REFERENCES listings(listing_id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+- ------------------------------------------------------------
+-- TRIGGER: auto-complete an order once all its items are delivered
+-- Fires whenever an order_item's status changes to 'delivered'.
+-- Checks if every other item on that same order is also
+-- 'delivered' - if so, flips the parent order to 'completed'.
+-- ------------------------------------------------------------
+DELIMITER $$
+ 
+CREATE TRIGGER trg_order_items_check_completion
+AFTER UPDATE ON order_items
+FOR EACH ROW
+BEGIN
+  DECLARE items_not_delivered INT;
+ 
+  IF NEW.status = 'delivered' AND OLD.status <> 'delivered' THEN
+    SELECT COUNT(*) INTO items_not_delivered
+    FROM order_items
+    WHERE order_id = NEW.order_id
+      AND status <> 'delivered';
+ 
+    IF items_not_delivered = 0 THEN
+      UPDATE orders
+      SET status = 'completed'
+      WHERE order_id = NEW.order_id
+        AND status <> 'cancelled';   -- don't resurrect a cancelled order
+    END IF;
+  END IF;
+END$$
+ 
+DELIMITER ;
+
+-- POPULATE PRODUCE CATALOG
+
+INSERT INTO produce (produce_name, category, description) VALUES
+('Tomato',               'Vegetable', 	'Fresh red tomatoes'),
+('Cabbage',              'Vegetable', 	'Green cabbage heads'),
+('Spinach',              'Vegetable', 	'Leafy spinach'),
+('Kale (Sukuma Wiki)',   'Vegetable', 	'Collard greens'),
+('Onion',                'Vegetable', 	'Red onions'),
+('Carrot',               'Vegetable', 	'Fresh carrots'),
+('Bell Pepper',          'Vegetable', 	'Capsicum, mixed colours'),
+('Potato',               'Vegetable', 	'Irish potatoes'),
+('Green Beans',          'Cereal',    	'French beans'),
+('Kidney Beans',         'Cereal',    	'Dry red kidney beans'),
+('Green Peas',           'Cereal',    	'Fresh green peas'),
+('Groundnuts',           'Cereal',    	'Raw peanuts'),
+('Lentils',              'Cereal',    	'Dry lentils'),
+('Maize',                'Cereal',    	'Dried maize / corn'),
+('Wheat',                'Cereal',    	'Wheat grain'),
+('Rice',                 'Cereal',    	'Paddy rice'),
+('Sorghum',              'Cereal',    	'Sorghum grain'),
+('Finger Millet', 'Cereal', 'Millet grain'),
+('Eggs', 'Animal Product', 'Kienyeji'),
+('Milk', 'Animal Product', 'Cow\'s milk'),
+('Beef', 'Animal Product', 'Cow\'s meat'),
+('Kienyeji chicken', 'Animal Product', 'Sold in parts');;
+
+
+-- Sample users, listings, and an order 
+
+INSERT INTO users (username, password, email, full_name, phone, location) VALUES
+('jkamau',  '$2y$10$examplehashexamplehashexamplehashexampleha', 'jkamau@example.com',  'John Kamau',  '0711000111', 'Nakuru'),
+('amwangi', '$2y$10$examplehashexamplehashexamplehashexampleha', 'amwangi@example.com', 'Alice Mwangi','0722000222', 'Nairobi');
+
+INSERT INTO listings (produce_id, farmer_id, price, unit, quantity_available) VALUES
+(1, 1, 80.00,  'kg', 200),   -- John selling tomatoes
+(14,1, 60.00,  'kg', 500),   -- John selling maize
+(9, 2, 120.00, 'kg', 100);   -- Alice selling green beans
+
+INSERT INTO orders (buyer_id, total_amount, status) VALUES
+(2, 400.00, 'completed');    -- Alice buying from John
+
+INSERT INTO order_items (order_id, listing_id, quantity, price_at_purchase, subtotal, status, dispatched_at, received_at) VALUES
+(1, 1, 5, 80.00, 400.00, 'delivered', NOW(), NOW());

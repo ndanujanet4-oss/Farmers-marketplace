@@ -1,0 +1,186 @@
+* { box-sizing: border-box; }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f5;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.container {
+    max-width: 420px;
+    margin: 60px auto;
+    background: #fff;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.wide-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+h1, h2 {
+    color: #2e7d32;
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type=text], input[type=email], input[type=password], input[type=tel] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #256428;
+}
+
+.error {
+    background: #fdecea;
+    color: #b71c1c;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-top: 14px;
+    font-size: 14px;
+}
+
+.success {
+    background: #eaf7ea;
+    color: #256428;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-top: 14px;
+    font-size: 14px;
+}
+
+.link-row {
+    margin-top: 18px;
+    font-size: 14px;
+    text-align: center;
+}
+
+a {
+    color: #2e7d32;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.topbar a {
+    text-decoration: none;
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+th {
+    background: #f0f4f0;
+}
+
+.stat-cards {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    flex: 1;
+    background: #f0f4f0;
+    padding: 18px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.stat-card .value {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.stat-card .label {
+    font-size: 13px;
+    color: #555;
+    margin-top: 4px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-pending {
+    background: #fff2cc;
+    color: #7a5c00;
+}
+
+.status-out_for_delivery {
+    background: #dae8fc;
+    color: #1a4a8a;
+}
+
+.status-delivered {
+    background: #d5e8d4;
+    color: #2e7d32;
+}
+
+.small-btn {
+    width: auto;
+    margin-top: 0;
+    padding: 6px 12px;
+    font-size: 12px;
+    background: #2e7d32;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.small-btn:hover {
+    background: #256428;
+}

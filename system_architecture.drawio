@@ -1,0 +1,92 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="System Architecture" id="archDiagram">
+    <mxGraphModel dx="1000" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- CLIENT LAYER -->
+        <mxCell id="client" value="Client&#10;(Web Browser - Farmer or Customer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="260" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- WEB SERVER LAYER -->
+        <mxCell id="webserver" value="Web Server&#10;(Apache / PHP built-in server)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="180" width="260" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- APPLICATION MODULES -->
+        <mxCell id="appLayerLabel" value="PHP Application Modules" style="text;align=center;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="320" y="270" width="260" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="mod_auth" value="Authentication&#10;(Register / Login)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="60" y="310" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_dashboard" value="Dashboard&#10;(Sales &amp; Purchases view)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="260" y="310" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_listings" value="Produce Listings&#10;(Browse / Set Price)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="460" y="310" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mod_orders" value="Orders&#10;(Place / Manage Purchases)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="660" y="310" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- DATABASE LAYER -->
+        <mxCell id="db" value="MySQL Database&#10;(farmers_marketplace)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="450" width="180" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- DEV TOOLS (side annotation) -->
+        <mxCell id="devToolsLabel" value="Development Environment" style="text;align=center;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="600" width="820" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sublime" value="Sublime Text&#10;(code editor)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="130" y="640" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="phpmyadmin" value="phpMyAdmin&#10;(DB administration UI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="360" y="640" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="localhost" value="Local Server Stack&#10;(XAMPP / WAMP / MAMP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="590" y="640" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ARROWS: main request/response flow -->
+        <mxCell id="e1" value="HTTP Request" style="html=1;fontSize=11;endArrow=block;rounded=0;" edge="1" parent="1" source="client" target="webserver">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="HTML/CSS Response" style="html=1;fontSize=11;endArrow=block;rounded=0;" edge="1" parent="1" source="webserver" target="client">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="210" />
+              <mxPoint x="660" y="70" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="routes to" style="html=1;fontSize=11;endArrow=block;rounded=0;" edge="1" parent="1" source="webserver" target="mod_dashboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="mod_auth" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="mod_dashboard" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="mod_listings" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="html=1;endArrow=block;rounded=0;" edge="1" parent="1" source="mod_orders" target="db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="SQL Queries (PDO)" style="html=1;fontSize=11;endArrow=none;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="440" as="sourcePoint" />
+            <mxPoint x="360" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
